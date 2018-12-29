@@ -1,0 +1,23 @@
+{
+  "name": "casacodigo",
+  "version": "1.0.0",
+  "description": "Livraria casa do codigo",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jorgedsdias/casa_codigo.git"
+  },
+  "author": "Jorge Dias",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jorgedsdias/casa_codigo/issues"
+  },
+  "homepage": "https://github.com/jorgedsdias/casa_codigo#readme",
+  "dependencies": {
+    "express": "4.16.3"
+  }
+}
