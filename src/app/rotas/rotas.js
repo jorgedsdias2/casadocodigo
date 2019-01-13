@@ -51,20 +51,22 @@ module.exports = (app) => {
     });
 
     app.post('/livros', function(req, res) {
-        console.log(req.body);
-
         const livroDAO = new LivroDAO(db);
         livroDAO.adiciona(req.body)
-        .then(res.redirect('/livros'))
+        .then(livro => {
+            console.log(livro);
+            res.redirect('/livros')
+        })
         .catch(erro => console.log(erro));
     });
 
     app.put('/livros', function(req, res) {
-        console.log(req.body);
-
         const livroDAO = new LivroDAO(db);
         livroDAO.atualiza(req.body)
-        .then(res.redirect('/livros'))
+        .then(livro => {
+            console.log(livro);
+            res.redirect('/livros')
+        })
         .catch(erro => console.log(erro));
     });    
 

@@ -19,12 +19,14 @@ class LivroDAO {
                 livro.descricao
             ],
             function(erro) {
+                livro.id = this.lastID;
+
                 if(erro) {
                     console.log(erro);
                     return reject('Nao foi possivel adicionar o livro!');
                 }
 
-                resolve();
+                resolve(livro);
             });
         });
     }
@@ -79,7 +81,7 @@ class LivroDAO {
                     if(erro) {
                         return reject('Nao foi possivel atualizar o livro!');
                     }
-                    resolve();
+                    resolve(livro);
                 }                
             );
         });
@@ -95,13 +97,12 @@ class LivroDAO {
                 `,
                 [id],
                 (erro) => {
-                    console.log('x');
                     if(erro) {
                         console.log(erro);
                         return reject('Nao foi possivel remover o livro!');
                     }
                     return resolve();
-                }                
+                }         
             );
         });
     }
