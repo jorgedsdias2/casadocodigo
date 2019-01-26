@@ -2,7 +2,16 @@ const LivroDAO = require('../infra/livro-dao');
 const db = require('../../config/database');
 
 module.exports = (app) => {
-    app.get('/', function(req, res) {
+    let loggedIn = (req, res, next) => {
+        if(req.isAuthenticated()) {
+            next();
+        } else {
+            res.redirect('/login');
+        }
+    };
+
+    app.get('/', loggedIn, function(req, res) {
+        console.log(req.session);
         res.send(`
             <html>
                 <head><meta charset="UTF-8"></head>
@@ -11,6 +20,12 @@ module.exports = (app) => {
                 </body>
             </html>
         `);
+    });
+
+    app.get('/login', function(req, res) {
+        res.marko(
+            require('../views/livros/auth/login.marko')
+        );
     });
     
     app.get('/livros', function(req, res) {
@@ -77,5 +92,10 @@ module.exports = (app) => {
         livroDAO.remove(id)
         .then(() => res.status(200).end())
         .catch(erro => console.log(erro));
+    });
+
+    app.get('/logout', function(req, res) {
+        req.logout();
+        res.send('/');
     });
 }
