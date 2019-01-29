@@ -6,7 +6,7 @@ module.exports = (app) => {
         if(req.isAuthenticated()) {
             next();
         } else {
-            res.redirect('/login');
+            res.render('livros/auth/login');
         }
     };
 
@@ -23,9 +23,7 @@ module.exports = (app) => {
     });
 
     app.get('/login', function(req, res) {
-        res.marko(
-            require('../views/livros/auth/login.marko')
-        );
+        res.render('livros/auth/login');
     });
     
     app.get('/livros', function(req, res) {
@@ -33,21 +31,16 @@ module.exports = (app) => {
         const livroDAO = new LivroDAO(db);
         livroDAO.lista()
         .then(
-            livros => res.marko(
-                require('../views/livros/lista/lista.marko'),
-                {
+            livros => 
+                res.render('livros/lista/lista', {
                     livros: livros
-                }
-            )
+                })
         )
         .catch(erro => console.log(erro));
     });
 
     app.get('/livros/form', function(req, res) {
-        res.marko(require('../views/livros/form/form.marko'), 
-        {
-            livro: {}
-        });
+        res.render('livros/form/form', {livro: {}});
     });
 
     app.get('/livros/form/:id', function(req, res) {
@@ -55,12 +48,10 @@ module.exports = (app) => {
         const livroDao = new LivroDAO(db);
 
         livroDao.buscaPorId(id)
-        .then(livro => res.marko(
-                require('../views/livros/form/form.marko'), 
-                { 
-                    livro: livro 
-                }
-            )
+        .then(livro => 
+                res.render('livros/form/form', {
+                    livro: livro
+                })
         )
         .catch(erro => console.log(erro));
     });

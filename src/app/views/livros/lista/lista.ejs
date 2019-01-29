@@ -1,0 +1,26 @@
+<html>
+    <head><meta charset="UTF-8"></head>
+    <body>
+        <h1>Listagem de Livros</h1>
+        <table id="livros">
+            <tr>
+                <td>ID</td>
+                <td>Título</td>
+                <td>Preço</td>
+                <td>Editar</td>
+                <td>Remover</td>
+            </tr>
+            <% for(var i = 0; i < livros.length; i++) { %>
+                <tr id="livro_<%= livros[i].id %>">
+                    <td><%= livros[i].id %></td>
+                    <td><%= livros[i].titulo %></td>
+                    <td><%= livros[i].preco %></td>
+                    <td><a href="/livros/form/<%= livros[i].id %>">Editar</a></td>
+                    <td><a href="#" data-ref="<%= livros[i].id %>" data-type="remocao">Remover</a></td>
+                </tr>
+            <% } %>            
+        </table>
+
+        <script src="/estatico/js/remove-livro.js"></script>
+    </body>
+</html>

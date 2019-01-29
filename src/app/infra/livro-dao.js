@@ -21,6 +21,8 @@ class LivroDAO {
             function(erro) {
                 livro.id = this.lastID;
 
+                console.log(livro.id);
+
                 if(erro) {
                     console.log(erro);
                     return reject('Nao foi possivel adicionar o livro!');
